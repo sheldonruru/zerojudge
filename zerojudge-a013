@@ -1,0 +1,40 @@
+def roman_to_int(roman):
+    roman_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50,
+                 'C': 100, 'D': 500, 'M': 1000}
+    total = 0
+    prev = 0
+    for ch in reversed(roman):
+        current = roman_map[ch]
+        if current < prev:
+            total -= current
+        else:
+            total += current
+            prev = current
+    return total
+
+def int_to_roman(num):
+    if num == 0:
+        return "ZERO"
+    
+    val_sym_pairs = [
+        (1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'),
+        (100, 'C'), (90, 'XC'), (50, 'L'), (40, 'XL'),
+        (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')
+    ]
+    result = ""
+    for value, symbol in val_sym_pairs:
+        while num >= value:
+            result += symbol
+            num -= value
+    return result
+
+# 主程式
+while True:
+    line = input().strip()
+    if line == "#":
+        break
+    a, b = line.split()
+    n1 = roman_to_int(a)
+    n2 = roman_to_int(b)
+    diff = abs(n1 - n2)
+    print(int_to_roman(diff))
