@@ -1,0 +1,7 @@
+a = input()
+b = ""
+for c in a:
+    d = ord(c) - 7
+    new_c = chr(d)
+    b += new_c
+print(b)
